@@ -7,9 +7,11 @@
 package org.mozilla.reference.browser.ui.robots
 
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.uiautomator.By
@@ -35,8 +37,11 @@ class SettingsViewRobot {
     fun verifyPrivacySummary() = assertPrivacySummary()
     fun verifyOpenLinksInApps() = assertOpenLinksInApps()
     fun verifyMakeDefaultBrowserButton() = assertMakeDefaultBrowserButton()
+    fun verifyAutofillAppsButton() = assertAutofillAppsButton()
+    fun varifyAutofillAppsSummary() = assertAutofillAppsSummary()
     fun verifyDeveloperToolsHeading() = assertDeveloperToolsHeading()
     fun verifyRemoteDebugging() = assertRemoteDebugging()
+    fun verifyCustomAddonCollectionButton() = assertCustomAddonCollectionButton()
     fun verifyMozillaHeading() = assertMozillaHeading()
     fun verifyAboutReferenceBrowserButton() = assertAboutReferenceBrowserButton()
 
@@ -103,8 +108,11 @@ private fun privacyButton() = Espresso.onView(withText(R.string.privacy))
 private fun privacySummary() = Espresso.onView(withText(R.string.preferences_privacy_summary))
 private fun openLinksInAppsToggle() = Espresso.onView(allOf(withId(R.id.switchWidget), hasCousin(withText(R.string.open_links_in_apps))))
 private fun makeDefaultBrowserButton() = Espresso.onView(withText(R.string.preferences_make_default_browser))
+private fun autofillAppsButton() = onView(withText("Autofill apps"))
+private fun autofillAppsSummary() = onView(withText("Autofill logins and passwords in other apps"))
 private fun developerToolsHeading() = Espresso.onView(withText(R.string.developer_tools_category))
 private fun remoteDebuggingToggle() = Espresso.onView(allOf(withId(R.id.switchWidget), hasCousin(withText(R.string.preferences_remote_debugging))))
+private fun customAddonCollectionButton() = onView(withText("Custom Add-on collection"))
 private fun mozillaHeading() = Espresso.onView(withText(R.string.mozilla_category))
 private fun aboutReferenceBrowserButton() = Espresso.onView(withText(R.string.preferences_about_page))
 
@@ -127,10 +135,16 @@ private fun assertOpenLinksInApps() = openLinksInAppsToggle()
         .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
 private fun assertMakeDefaultBrowserButton() = makeDefaultBrowserButton()
         .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
+private fun assertAutofillAppsButton() = autofillAppsButton()
+        .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
+private fun assertAutofillAppsSummary() = autofillAppsSummary()
+        .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
 private fun assertDeveloperToolsHeading() = developerToolsHeading()
         .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
 private fun assertRemoteDebugging() = remoteDebuggingToggle()
         .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
+private fun assertCustomAddonCollectionButton() = customAddonCollectionButton()
+        .check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
 private fun assertMozillaHeading() = mozillaHeading()
         .check(matches(ViewMatchers.withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)))
 private fun assertAboutReferenceBrowserButton() = aboutReferenceBrowserButton()

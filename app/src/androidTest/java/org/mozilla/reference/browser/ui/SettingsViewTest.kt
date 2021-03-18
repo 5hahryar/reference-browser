@@ -9,6 +9,7 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.mozilla.reference.browser.helpers.BrowserActivityTestRule
+import org.mozilla.reference.browser.helpers.TestHelper.scrollToElementByText
 import org.mozilla.reference.browser.ui.robots.navigationToolbar
 
 /**
@@ -31,7 +32,6 @@ class SettingsViewTest {
         navigationToolbar {
         }.openThreeDotMenu {
         }.openSettings {
-            verifySettingsViewExists()
             verifyNavigateUp()
             verifySyncSigninButton()
             verifySyncHistorySummary()
@@ -41,8 +41,12 @@ class SettingsViewTest {
             verifyPrivacySummary()
             verifyOpenLinksInApps()
             verifyMakeDefaultBrowserButton()
+            verifyAutofillAppsButton()
+            varifyAutofillAppsSummary()
             verifyDeveloperToolsHeading()
             verifyRemoteDebugging()
+            verifyCustomAddonCollectionButton()
+            scrollToElementByText("About Reference Browser")
             verifyMozillaHeading()
             verifyAboutReferenceBrowserButton()
         }
